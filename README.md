@@ -1,4 +1,4 @@
-# ShiftFlow – Workforce Scheduling API
+Workforce Scheduling API
 
 Backend do sistema de gestão de escalas e plantões, desenvolvido com Java e Spring Boot.
 
