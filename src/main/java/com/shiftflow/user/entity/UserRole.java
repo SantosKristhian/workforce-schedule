@@ -1,4 +1,4 @@
-package com.shiftflow.shiftflow.user.entity;
+package com.shiftflow.user.entity;
 
 public enum UserRole {
 

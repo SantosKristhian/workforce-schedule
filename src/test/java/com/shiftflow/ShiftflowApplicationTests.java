@@ -1,4 +1,4 @@
-package com.shiftflow.shiftflow;
+package com.shiftflow;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

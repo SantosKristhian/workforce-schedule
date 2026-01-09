@@ -1,11 +1,10 @@
-package com.shiftflow.shiftflow.user.controller;
+package com.shiftflow.user.controller;
 
-import com.shiftflow.shiftflow.user.dto.UserCreateRequest;
-import com.shiftflow.shiftflow.user.dto.UserResponse;
-import com.shiftflow.shiftflow.user.entity.User;
-import com.shiftflow.shiftflow.user.service.UserService;
+import com.shiftflow.user.dto.UserCreateRequest;
+import com.shiftflow.user.dto.UserResponse;
+import com.shiftflow.user.entity.User;
+import com.shiftflow.user.service.UserService;
 import jakarta.validation.Valid;
-import jdk.jfr.Category;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
-package com.shiftflow.shiftflow.user.dto;
-import com.shiftflow.shiftflow.user.entity.User;
-import com.shiftflow.shiftflow.user.entity.UserRole;
+package com.shiftflow.user.dto;
+import com.shiftflow.user.entity.User;
+import com.shiftflow.user.entity.UserRole;
 
 
 import java.time.LocalDateTime;

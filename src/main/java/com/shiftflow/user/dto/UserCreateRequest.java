@@ -1,6 +1,6 @@
-package com.shiftflow.shiftflow.user.dto;
+package com.shiftflow.user.dto;
 
-import com.shiftflow.shiftflow.user.entity.UserRole;
+import com.shiftflow.user.entity.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

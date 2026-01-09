@@ -1,6 +1,6 @@
-package com.shiftflow.shiftflow.user.repository;
+package com.shiftflow.user.repository;
 
-import com.shiftflow.shiftflow.user.entity.User;
+import com.shiftflow.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
