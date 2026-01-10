@@ -24,24 +24,30 @@ public class TeamService {
     public Team createTeam(String name, Long managerId, List<Long> employeeIds, User currentUser) {
 
         boolean isAdmin = currentUser.getRole() == UserRole.ADMIN;
+        boolean isManager = currentUser.getRole() == UserRole.MANAGER;
 
-        if (!isAdmin && currentUser.getRole() != UserRole.MANAGER) {
+
+        if (!isAdmin && !isManager) {
             throw new IllegalArgumentException("Only ADMIN or MANAGER can create a team");
         }
+
 
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Team name is required");
         }
 
+
         teamRepository.findByName(name).ifPresent(t -> {
             throw new IllegalArgumentException("Team name must be unique");
         });
 
+
         User manager = userRepository.findById(managerId)
                 .orElseThrow(() -> new IllegalArgumentException("Manager not found"));
 
-        if (!isAdmin && manager.getRole() != UserRole.MANAGER) {
-            throw new IllegalArgumentException("Manager must have role MANAGER");
+
+        if (manager.getRole() != UserRole.MANAGER && manager.getRole() != UserRole.ADMIN) {
+            throw new IllegalArgumentException("Manager must have role MANAGER or ADMIN");
         }
 
 
@@ -49,18 +55,18 @@ public class TeamService {
 
                 .filter(emp -> !emp.getId().equals(manager.getId()))
 
-                .filter(emp -> isAdmin || emp.getRole() == UserRole.EMPLOYEE)
+                .filter(emp -> emp.getRole() == UserRole.EMPLOYEE)
                 .collect(Collectors.toList());
 
 
-        if (!isAdmin) {
-            List<User> invalidUsers = userRepository.findAllById(employeeIds).stream()
-                    .filter(emp -> emp.getRole() != UserRole.EMPLOYEE && !emp.getId().equals(manager.getId()))
-                    .collect(Collectors.toList());
-            if (!invalidUsers.isEmpty()) {
-                throw new IllegalArgumentException("Only users with role EMPLOYEE can be employees");
-            }
+        List<User> invalidUsers = userRepository.findAllById(employeeIds).stream()
+                .filter(emp -> emp.getRole() != UserRole.EMPLOYEE && !emp.getId().equals(manager.getId()))
+                .collect(Collectors.toList());
+
+        if (!invalidUsers.isEmpty()) {
+            throw new IllegalArgumentException("Only users with role EMPLOYEE can be employees");
         }
+
 
         Team team = new Team();
         team.setName(name);
@@ -70,6 +76,7 @@ public class TeamService {
 
         return teamRepository.save(team);
     }
+
 
     public Team getTeamById(Long id) {
         Team team = teamRepository.findById(id)
